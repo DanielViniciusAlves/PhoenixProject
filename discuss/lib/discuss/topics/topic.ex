@@ -8,7 +8,6 @@ defmodule Discuss.Topics.Topic do
     timestamps()
   end
 
-  @doc false
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title])
