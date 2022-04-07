@@ -4,6 +4,8 @@ defmodule Discuss.Topics.Topic do
 
   schema "topics" do
     field(:title, :string)
+    belongs_to(:user, Discuss.User)
+    has_many(:comments, Discuss.Comment)
 
     timestamps()
   end
