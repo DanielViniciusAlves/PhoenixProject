@@ -1,7 +1,9 @@
 defmodule(DiscussWeb.CommentsChannel) do
   use DiscussWeb, :channel
 
-  def join() do
+  def join(name, _params, socket) do
+    IO.inspect(name)
+    {:ok, %{hey: "there"}, socket}
   end
 
   def handle_in() do
