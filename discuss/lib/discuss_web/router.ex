@@ -9,6 +9,7 @@ defmodule DiscussWeb.Router do
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
     plug(DiscussWeb.Plugs.SetUser)
+    plug(:put_user_token)
   end
 
   pipeline :api do
@@ -61,6 +62,15 @@ defmodule DiscussWeb.Router do
       pipe_through(:browser)
 
       forward("/mailbox", Plug.Swoosh.MailboxPreview)
+    end
+  end
+
+  defp put_user_token(conn, _) do
+    if user = conn.assigns[:user] do
+      token = Phoenix.Token.sign(DiscussWeb.Endpoint, "key", conn.assigns.user.id)
+      assign(conn, :user_token, token)
+    else
+      conn
     end
   end
 end
