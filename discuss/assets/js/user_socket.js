@@ -42,6 +42,7 @@ function commentTemplate(comment) {
   if (comment.user) {
     email = comment.user.email;
   }
+
   return `
     <li class="collection-item">
       ${comment.content}
